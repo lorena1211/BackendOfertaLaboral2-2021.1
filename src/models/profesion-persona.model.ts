@@ -1,8 +1,30 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {belongsTo, Entity, model, property} from '@loopback/repository';
 import {Trabaja} from './trabaja.model';
-import {Profesion} from './profesion.model';
 
-@model()
+@model({
+  settings: {
+    foreignKeys: {
+      fk_persona_id: {
+        name: 'fk_persona_prof_per_id',
+        entity: 'Persona',
+        entityKey: 'id',
+        foreignKey: 'personaId',
+      },
+      fk_trabaja_id: {
+        name: 'fk_trabaja_prof_per_id',
+        entity: 'Trabaja',
+        entityKey: 'id',
+        foreignKey: 'trabajaId',
+      },
+      fk_profesion_id: {
+        name: 'fk_profesion_prof_per_id',
+        entity: 'Profesion',
+        entityKey: 'id',
+        foreignKey: 'profesionId',
+      },
+    },
+  }
+})
 export class ProfesionPersona extends Entity {
   @property({
     type: 'number',
@@ -14,8 +36,15 @@ export class ProfesionPersona extends Entity {
   @belongsTo(() => Trabaja)
   trabajaId: number;
 
-  @belongsTo(() => Profesion)
-  profesionId: number;
+  @property({
+    type: 'number',
+  })
+  personaId?: number;
+
+  @property({
+    type: 'number',
+  })
+  profesionId?: number;
 
   constructor(data?: Partial<ProfesionPersona>) {
     super(data);

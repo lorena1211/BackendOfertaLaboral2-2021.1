@@ -1,13 +1,13 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasManyThroughRepositoryFactory, HasManyRepositoryFactory, BelongsToAccessor} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {BelongsToAccessor, DefaultCrudRepository, HasManyRepositoryFactory, HasManyThroughRepositoryFactory, repository} from '@loopback/repository';
 import {MysqldsDataSource} from '../datasources';
-import {Persona, PersonaRelations, Habilidad, HabilidadesPersona, Documento, SolicitudEmpresaPersona, Estado, Ciudad, Profesion, ProfesionPersona} from '../models';
-import {HabilidadesPersonaRepository} from './habilidades-persona.repository';
-import {HabilidadRepository} from './habilidad.repository';
-import {DocumentoRepository} from './documento.repository';
-import {SolicitudEmpresaPersonaRepository} from './solicitud-empresa-persona.repository';
-import {EstadoRepository} from './estado.repository';
+import {Ciudad, Documento, Estado, Habilidad, HabilidadesPersona, Persona, PersonaRelations, SolicitudEmpresaPersona, Profesion, ProfesionPersona} from '../models';
 import {CiudadRepository} from './ciudad.repository';
+import {DocumentoRepository} from './documento.repository';
+import {EstadoRepository} from './estado.repository';
+import {HabilidadRepository} from './habilidad.repository';
+import {HabilidadesPersonaRepository} from './habilidades-persona.repository';
+import {SolicitudEmpresaPersonaRepository} from './solicitud-empresa-persona.repository';
 import {ProfesionPersonaRepository} from './profesion-persona.repository';
 import {ProfesionRepository} from './profesion.repository';
 
@@ -18,9 +18,9 @@ export class PersonaRepository extends DefaultCrudRepository<
 > {
 
   public readonly habilidades: HasManyThroughRepositoryFactory<Habilidad, typeof Habilidad.prototype.id,
-          HabilidadesPersona,
-          typeof Persona.prototype.id
-        >;
+    HabilidadesPersona,
+    typeof Persona.prototype.id
+  >;
 
   public readonly documentos: HasManyRepositoryFactory<Documento, typeof Persona.prototype.id>;
 
